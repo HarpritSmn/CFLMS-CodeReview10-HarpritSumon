@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<?php 
+
+    require_once 'db_connect.php';
+
+    if ($_POST) {
+        $author = $_POST['author'];
+        $title = $_POST['title'];
+        $descriptio = $_POST[ 'descriptio'];
+        $picture = $_POST[ 'picture'];
+        //    $status = $_POST[ 'status'];
+
+        $id = $_POST['id'];
+
+        $sql = "UPDATE books SET author = '$author', title = '$title', descriptio = '$descriptio', picture = '$picture'  WHERE id = {$id}" ;
+        if  ($connect->query($sql) === TRUE) {
+            echo "<br><h1 class='display-4 center d-flex justify-content-center'> Successfully Updated</h1> <br><br>
+                    
+                    <div class='container'>
+                    
+                        <div class='row'>
+                            <div class='col'>
+                            <a href='../update.php?id=" .$id."'><button class='btn btn-primary btn-lg btn-block' type='button'>Back</button></a>
+                                </div>
+                                <div class='col'>
+                                <a href='../index.php'><button class='btn btn-primary btn-lg btn-block' type='button'>Home</button></a>
+                            </div>
+                        </div>
+                    
+                    
+                    </div>
+                    ";
+        } else {
+            echo "Error while updating record : ". $connect->error;
+        }
+
+        $connect->close();
+
+    }
+
+?>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
